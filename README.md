@@ -8,7 +8,7 @@
 
 I make cozy things, chaotic things, and sometimes things that are somehow both.
 
-[My website](https://sasutendo.tech) · [Twitch](https://twitch.tv/am_sasutendo) · [TikTok](https://tiktok.com/@sasutendo) · [Instagram](https://instagram.com/sasutendo) · [YouTube](https://youtube.com/@sasutendo)
+[My website](https://nyuukoria.tech) · [Twitch](https://twitch.tv/nyuukoria) · [TikTok](https://tiktok.com/@nyuukoria) · [Instagram](https://instagram.com/nyuukoria) · [YouTube](https://youtube.com/@nyuukoria)
 
 </div>
 
