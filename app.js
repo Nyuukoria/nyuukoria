@@ -1,14 +1,14 @@
 const DEFAULT_DATA = {
   profile: {
     displayName: "Yuuki",
-    username: "@sasutendo",
+    username: "@nyuukoria",
     tagline: "See the light is shining so bright",
     bio: "Gamer, artist, coder, osu! enjoyer, and lover of cozy dark fantasy aesthetics.",
     avatar: "assets/profile.jpg",
     banner: "assets/banner.png",
     badges: ["she/her", "eepy", "artist", "coder"],
-    aboutIntro: "Hiiyaaa, I'm Yuuki. I like osu!, coding. This page is a small place for my socials, projects, and things I care about. Feel free to explore and reach out if you wanna chat or collab on something fun! ♡. My Discord is @Sasutendo",
-    names: ["Yuuki", "Yui", "Sasutendo", "Sasu"],
+    aboutIntro: "Hiiyaaa, I'm Yuuki. I like osu!, coding. This page is a small place for my socials, projects, and things I care about. Feel free to explore and reach out if you wanna chat or collab on something fun! ♡. My Discord is @Nyuukoria",
+    names: ["Yuuki", "Yui", "Nyuukoria"],
     pronouns: ["she/her"],
     likes: ["cats", "coffee", "osu!", "Minecraft", "cozy designs", "dark fantasy", "anime art"],
     boundaries: ["don’t be creepy", "don’t spam", "don’t be overly formal"],
@@ -39,12 +39,12 @@ const DEFAULT_DATA = {
   },
 
   socials: [
-    { label: "TikTok", icon: "♪", url: "https://tiktok.com/@sasutendo" },
-    { label: "Instagram", icon: "◎", url: "https://instagram.com/sasutendo" },
-    { label: "Twitch", icon: "▣", url: "https://twitch.tv/am_sasutendo" },
-    { label: "YouTube", icon: "▶", url: "https://youtube.com/@sasutendo" },
+    { label: "TikTok", icon: "♪", url: "https://tiktok.com/@nyuukoria" },
+    { label: "Instagram", icon: "◎", url: "https://instagram.com/nyuukoria" },
+    { label: "Twitch", icon: "▣", url: "https://twitch.tv/nyuukoria" },
+    { label: "YouTube", icon: "▶", url: "https://youtube.com/@nyuukoria" },
     { label: "Discord", icon: "☁", url: "https://discord.gg/9hfnXKx7xZ" },
-    { label: "GitHub", icon: "⌘", url: "https://github.com/Sasutendo" }
+    { label: "GitHub", icon: "⌘", url: "https://github.com/Nyuukoria" }
   ],
 
   links: [
@@ -60,7 +60,7 @@ const DEFAULT_DATA = {
       title: "Twitch",
       description: "Streams and cozy chaos.",
       icon: "▣",
-      url: "https://twitch.tv/am_sasutendo",
+      url: "https://twitch.tv/nyuukoria",
       featured: true,
       enabled: true
     },
@@ -68,7 +68,7 @@ const DEFAULT_DATA = {
       title: "TikTok",
       description: "Short clips and posts.",
       icon: "♪",
-      url: "https://tiktok.com/@sasutendo",
+      url: "https://tiktok.com/@nyuukoria",
       featured: false,
       enabled: true
     },
@@ -76,7 +76,7 @@ const DEFAULT_DATA = {
       title: "YouTube",
       description: "Videos and projects.",
       icon: "▶",
-      url: "https://youtube.com/@sasutendo",
+      url: "https://youtube.com/@nyuukoria",
       featured: false,
       enabled: true
     },
@@ -84,7 +84,7 @@ const DEFAULT_DATA = {
       title: "Spotify",
       description: "Music vibe.",
       icon: "♫",
-      url: "https://open.spotify.com/",
+      url: "https://open.spotify.com/user/1z5q051gcrmu6ckbybvr16uj2?si=efafa7b1e3984496",
       featured: false,
       enabled: true
     },
@@ -92,7 +92,7 @@ const DEFAULT_DATA = {
       title: "Pronouns",
       description: "Names, pronouns, and words.",
       icon: "♡",
-      url: "https://en.pronouns.page/@Sasutendo",
+      url: "https://en.pronouns.page/@Nyuukoria",
       featured: false,
       enabled: true
     }
@@ -213,7 +213,7 @@ async function loadData() {
 }
 
 async function saveData() {
-  localStorage.setItem("sasutendo-site-data-backup", JSON.stringify(siteData, null, 2));
+  localStorage.setItem("nyuukoria-site-data-backup", JSON.stringify(siteData, null, 2));
 
   try {
     const response = await fetch("/api/save-site-data", {
@@ -521,7 +521,7 @@ async function setupVisitCounter() {
   if (!visitCount) return;
 
   try {
-    const sessionKey = "sasutendo-counted-visit";
+    const sessionKey = "nyuukoria-counted-visit";
     const alreadyCounted = sessionStorage.getItem(sessionKey) === "true";
 
     const response = await fetch("/api/visit", {
@@ -1124,7 +1124,7 @@ function handleLinkEditorChange(event) {
 
 async function liveSaveAndRender() {
   renderSite();
-  localStorage.setItem("sasutendo-site-sync", String(Date.now()));
+  localStorage.setItem("nyuukoria-site-sync", String(Date.now()));
 
   if (isOwnerMode && adminModal) {
     adminModal.classList.remove("hidden");
@@ -1135,7 +1135,7 @@ async function liveSaveAndRender() {
 
 function saveAdminFieldsToData() {
   siteData.profile.displayName = $("#editDisplayName").value.trim() || "Yuuki";
-  siteData.profile.username = $("#editUsername").value.trim() || "@sasutendo";
+  siteData.profile.username = $("#editUsername").value.trim() || "@nyuukoria";
   siteData.profile.tagline = $("#editTagline").value.trim();
   siteData.profile.bio = $("#editBio").value.trim();
   siteData.profile.avatar = $("#editAvatar").value.trim();
@@ -1314,7 +1314,7 @@ function setupAdmin() {
 
   $("#resetDataButton").addEventListener("click", () => {
     if (!confirm("Reset all local edits?")) return;
-    localStorage.removeItem("sasutendo-site-data");
+    localStorage.removeItem("nyuukoria-site-data");
     siteData = structuredClone(DEFAULT_DATA);
     renderSite();
   });
@@ -1364,7 +1364,7 @@ function setupLiveAdminPreview() {
       saveData();
       renderSite();
 
-      localStorage.setItem("sasutendo-site-sync", String(Date.now()));
+      localStorage.setItem("nyuukoria-site-sync", String(Date.now()));
 
       // Keep admin open after renderSite refills fields
       adminModal.classList.remove("hidden");
@@ -1387,7 +1387,7 @@ function setupIntroAndMusic() {
   const musicButton = $("#musicButton");
   const volumeSlider = $("#musicVolumeSlider");
   const volumeText = $("#musicVolumeText");
-  const volumeStorageKey = "sasutendo-music-volume";
+  const volumeStorageKey = "nyuukoria-music-volume";
 
   const storedVolume = Number(localStorage.getItem(volumeStorageKey));
   const defaultVolume = Number(siteData.theme.musicVolume ?? 0.22);
@@ -1530,8 +1530,8 @@ function lockAdminForVisitors() {
 
 window.addEventListener("storage", (event) => {
   if (
-    event.key === "sasutendo-site-data" ||
-    event.key === "sasutendo-site-sync"
+    event.key === "nyuukoria-site-data" ||
+    event.key === "nyuukoria-site-sync"
   ) {
     siteData = loadData();
     renderSite();
