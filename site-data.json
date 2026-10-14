@@ -1,7 +1,7 @@
 {
   "profile": {
     "displayName": "Yuuki",
-    "username": "@sasutendo",
+    "username": "@nyuukoria",
     "tagline": "HEYYY LISTEN",
     "bio": "Gamer, artist, Tattoo artist, coder, osu! enjoyer, and lover of cozy dark fantasy aesthetics.",
     "avatar": "assets/profile.jpg",
@@ -14,12 +14,11 @@
       "coder",
       "tattoo"
     ],
-    "aboutIntro": "Hiiyaaa, I'm Yuuki.\nAm 22.\nI like osu!, coding, anime, tattoos, gaming and hella lots more. \nThis page is a small place for my socials, projects, and things I care about. \nFeel free to explore and reach out if you wanna chat or collab on something fun! ♡. \nMy Discord is @Sasutendo",
+    "aboutIntro": "Hiiyaaa, I'm Yuuki.\nAm 22.\nI like osu!, coding, anime, tattoos, gaming and hella lots more. \nThis page is a small place for my socials, projects, and things I care about. \nFeel free to explore and reach out if you wanna chat or collab on something fun! ♡. \nMy Discord is @Nyuukoria",
     "names": [
       "Yuuki",
       "Yui",
-      "Sasutendo",
-      "Sasu"
+      "Nyuukoria"
     ],
     "pronouns": [
       "she/her"
@@ -77,37 +76,37 @@
     {
       "label": "TikTok",
       "icon": "♪",
-      "url": "https://tiktok.com/@sasutendo"
+      "url": "https://tiktok.com/@nyuukoria"
     },
     {
       "label": "Instagram",
       "icon": "◎",
-      "url": "https://instagram.com/sasutendo"
+      "url": "https://instagram.com/nyuukoria"
     },
     {
       "label": "Twitch",
       "icon": "▣",
-      "url": "https://twitch.tv/am_sasutendo"
+      "url": "https://twitch.tv/nyuukoria"
     },
     {
       "label": "YouTube",
       "icon": "▶",
-      "url": "https://youtube.com/@sasutendo"
+      "url": "https://youtube.com/@nyuukoria"
     },
     {
       "label": "GitHub",
       "icon": "⌘",
-      "url": "https://github.com/Sasutendo"
+      "url": "https://github.com/Nyuukoria"
     },
     {
       "label": "Throne",
       "icon": "🎁",
-      "url": "https://throne.com/yuuki_yui"
+      "url": "https://throne.com/nyuukoria"
     },
     {
       "label": "Steam Wishlist",
       "icon": "🎮",
-      "url": "https://store.steampowered.com/wishlist/id/Sasutendo/?sort=discount&st=10281845309481781812"
+      "url": "https://store.steampowered.com/wishlist/id/Nyuukoria/?sort=discount&st=5062176674083581751"
     }
   ],
   "links": [
@@ -139,7 +138,7 @@
       "title": "TikTok",
       "description": "  Short clips and posts.",
       "icon": "♪",
-      "url": "https://tiktok.com/@sasutendo",
+      "url": "https://tiktok.com/@nyuukoria",
       "featured": false,
       "enabled": true
     },
@@ -147,7 +146,7 @@
       "title": "Twitch",
       "description": "  Streams and cozy chaos.",
       "icon": "▣",
-      "url": "https://twitch.tv/am_sasutendo",
+      "url": "https://twitch.tv/nyuukoria",
       "featured": false,
       "enabled": true
     },
@@ -155,7 +154,7 @@
       "title": "YouTube",
       "description": "  Videos and projects.",
       "icon": "▶",
-      "url": "https://youtube.com/@sasutendo",
+      "url": "https://youtube.com/@nyuukoria",
       "featured": false,
       "enabled": true
     },
@@ -163,7 +162,7 @@
       "title": "Spotify",
       "description": "  Music vibe.",
       "icon": "♫",
-      "url": "https://open.spotify.com/user/1z5q051gcrmu6ckbybvr16uj2?si=4e940770b45c44a4",
+      "url": "https://open.spotify.com/user/1z5q051gcrmu6ckbybvr16uj2?si=efafa7b1e3984496",
       "featured": false,
       "enabled": true
     },
@@ -179,7 +178,7 @@
       "title": "Steam Wishlist",
       "description": "Games I’d love to play ♡",
       "icon": "🎮",
-      "url": "https://store.steampowered.com/wishlist/id/Sasutendo/?sort=discount&st=10281845309481781812",
+      "url": "https://store.steampowered.com/wishlist/id/Nyuukoria/?sort=discount&st=5062176674083581751",
       "featured": false,
       "enabled": true
     },
@@ -195,7 +194,7 @@
       "title": "GitHub",
       "description": "My projects and code.",
       "icon": "⌘",
-      "url": "https://github.com/Sasutendo",
+      "url": "https://github.com/Nyuukoria",
       "featured": false,
       "enabled": true
     }
