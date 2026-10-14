@@ -16,7 +16,7 @@ I make cozy things, chaotic things, and sometimes things that are somehow both.
 
 ## 🌙 About me
 
-I'm **Yuuki**, also known as **Sasutendo**. I'm 22 and spend a lot of my time creating, gaming, coding, drawing, and collecting far too many ideas for future projects.
+I'm **Yuuki**, also known as **Nyuukoria**. I'm 22 and spend a lot of my time creating, gaming, coding, drawing, and collecting far too many ideas for future projects.
 
 I like personal projects that feel a little different: cozy interfaces, dark fantasy, playful details, Minecraft experiments, and designs that actually feel like *me*.
 
@@ -46,7 +46,7 @@ A small home for my socials, projects, gallery, interests, and updates—built t
 
 ## 🩷 This website
 
-The repository lets visitors look through the project behind [sasutendo.tech](https://sasutendo.tech). The website is colorful, animated, personal, and designed for phones as well as desktop screens.
+The repository lets visitors look through the project behind [nyuukoria.tech](https://nyuukoria.tech). The website is colorful, animated, personal, and designed for phones as well as desktop screens.
 
 ### Highlights
 
@@ -75,7 +75,7 @@ Sharing a link does not give anyone permission to reuse the project.
 
 ## 📜 Rights
 
-**© 2026 Yuuki (Sasutendo). All rights reserved.**
+**© 2026 Yuuki (Nyuukoria). All rights reserved.**
 
 The complete [view-only copyright notice](./LICENSE) applies to the source code, design, layout, text, branding, images, GIFs, audio, artwork, profile content, and every other part of this project.
 

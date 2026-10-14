@@ -2,7 +2,7 @@ const express = require("express");
 const fs = require("fs/promises");
 const path = require("path");
 
-console.log("RUNNING SASUTENDO WEBSITE SERVER:", __filename);
+console.log("RUNNING NYUUKORIA WEBSITE SERVER:", __filename);
 console.log("WORKING FOLDER:", __dirname);
 
 const app = express();
