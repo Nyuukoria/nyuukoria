@@ -14,6 +14,18 @@ const PUBLIC_DIR = __dirname;
 app.use(express.json({ limit: "10mb" }));
 
 let localNudeClickCount = 0;
+let localVisitCount = 0;
+
+app.get("/api/visit", (req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.json({ visits: localVisitCount });
+});
+
+app.post("/api/visit", (req, res) => {
+  localVisitCount += 1;
+  res.set("Cache-Control", "no-store");
+  res.json({ visits: localVisitCount });
+});
 
 app.get("/api/nude-click", (req, res) => {
   res.set("Cache-Control", "no-store");
@@ -53,6 +65,7 @@ app.use((req, res) => {
   res.sendFile(path.join(PUBLIC_DIR, "index.html"));
 });
 
-app.listen(PORT, () => {
+// Local editing has no production authentication; never expose it on the network.
+app.listen(PORT, "127.0.0.1", () => {
   console.log(`Website running on http://localhost:${PORT}`);
 });

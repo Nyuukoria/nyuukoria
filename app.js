@@ -169,10 +169,9 @@ const DEFAULT_DATA = {
 
 let siteData = structuredClone(DEFAULT_DATA);
 
-const OWNER_KEY = "yuuki-yui-admin-panel"; // change this to your own secret word
 const urlParams = new URLSearchParams(window.location.search);
 const isOwnerMode =
-  urlParams.get("owner") === OWNER_KEY ||
+  urlParams.has("owner") ||
   window.location.hostname.startsWith("admin.");
 
 if (isOwnerMode) {
@@ -208,31 +207,80 @@ async function loadData() {
     return mergeDeep(structuredClone(DEFAULT_DATA), jsonData);
   } catch (error) {
     console.warn("Could not load site-data.json, using DEFAULT_DATA:", error);
+    if (isOwnerMode) {
+      alert("Website content could not be loaded. Editing is paused to protect your saved content. Please reload and try again.");
+      return null;
+    }
     return structuredClone(DEFAULT_DATA);
   }
 }
 
-async function saveData() {
-  localStorage.setItem("nyuukoria-site-data-backup", JSON.stringify(siteData, null, 2));
+let saveTimer;
+let saveQueue = Promise.resolve();
+let lastSaveAt = 0;
+let editRevision = 0;
+let hasUnsavedChanges = false;
 
-  try {
-    const response = await fetch("/api/save-site-data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(siteData)
-    });
-
-    if (!response.ok) {
-      throw new Error(await response.text());
-    }
-
-    console.log("Saved to site-data.json");
-  } catch (error) {
-    console.warn("Could not save to site-data.json. Local backup only:", error);
-  }
+function setSaveStatus(message) {
+  const status = $("#saveStatus");
+  if (status) status.textContent = message;
 }
+
+function scheduleSave() {
+  hasUnsavedChanges = true;
+  editRevision += 1;
+  setSaveStatus("Unsaved changes…");
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => { saveData(); }, 1400);
+}
+
+async function saveData() {
+  clearTimeout(saveTimer);
+  const content = JSON.stringify(siteData, null, 2);
+  const revision = editRevision;
+  hasUnsavedChanges = true;
+  try { localStorage.setItem("nyuukoria-site-data-backup", content); }
+  catch (error) { console.warn("Local backup unavailable:", error); }
+
+  // Serialize saves and stay below KV's one-write-per-second limit per key.
+  const task = saveQueue.then(async () => {
+    const delay = Math.max(0, 1100 - (Date.now() - lastSaveAt));
+    if (delay) await new Promise(resolve => setTimeout(resolve, delay));
+    lastSaveAt = Date.now();
+    setSaveStatus("Saving online…");
+    try {
+      const response = await fetch("/api/save-site-data", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: content
+      });
+      if (!response.ok) {
+        let message = `Save failed (${response.status})`;
+        try { message = (await response.json()).error || message; } catch {}
+        throw new Error(message);
+      }
+      const result = await response.json();
+      if (result.ok !== true) throw new Error("The server did not confirm the save.");
+      if (revision === editRevision) {
+        hasUnsavedChanges = false;
+        setSaveStatus("Saved online ♡");
+      }
+      return true;
+    } catch (error) {
+      console.warn("Online save failed:", error);
+      setSaveStatus(`Not saved online: ${error.message} Use Export JSON to keep a copy.`);
+      return false;
+    }
+  });
+  saveQueue = task.catch(() => false);
+  return task;
+}
+
+window.addEventListener("beforeunload", event => {
+  if (!hasUnsavedChanges) return;
+  event.preventDefault();
+  event.returnValue = "";
+});
 
 function mergeDeep(target, source) {
   for (const key of Object.keys(source || {})) {
@@ -1130,7 +1178,7 @@ async function liveSaveAndRender() {
     adminModal.classList.remove("hidden");
   }
 
-  await saveData();
+  scheduleSave();
 }
 
 function saveAdminFieldsToData() {
@@ -1196,11 +1244,11 @@ function splitComma(value) {
 }
 
 function setupAdmin() {
+  setupLiveAdminPreview();
   adminOpenButton.addEventListener("click", () => {
   if (!isOwnerMode) return;
 
   fillAdminFields();
-  setupLiveAdminPreview();
   adminModal.classList.remove("hidden");
   });
 
@@ -1287,11 +1335,15 @@ function setupAdmin() {
     $("#cardOpacityValue").textContent = `${Math.round(Number($("#editCardOpacity").value) * 100)}%`;
   });
 
-  saveAdminButton.addEventListener("click", () => {
+  saveAdminButton.addEventListener("click", async () => {
     saveAdminFieldsToData();
-    saveData();
-    renderSite();
-    adminModal.classList.add("hidden");
+    saveAdminButton.disabled = true;
+    try {
+      if (await saveData()) {
+        renderSite();
+        if (!hasUnsavedChanges) adminModal.classList.add("hidden");
+      }
+    } finally { saveAdminButton.disabled = false; }
   });
 
   $("#exportDataButton").addEventListener("click", async () => {
@@ -1300,13 +1352,14 @@ function setupAdmin() {
     alert("Data exported. It was also copied if browser allowed clipboard.");
   });
 
-  $("#importDataButton").addEventListener("click", () => {
+  $("#importDataButton").addEventListener("click", async () => {
     try {
       const imported = JSON.parse($("#dataEditor").value);
       siteData = mergeDeep(structuredClone(DEFAULT_DATA), imported);
-      saveData();
+      editRevision += 1;
+      const saved = await saveData();
       renderSite();
-      alert("Imported.");
+      alert(saved ? "Imported and saved online." : "Imported locally. Online save failed; check the status beside Save Changes.");
     } catch {
       alert("Invalid JSON.");
     }
@@ -1361,7 +1414,7 @@ function setupLiveAdminPreview() {
   const liveUpdate = () => {
     try {
       saveAdminFieldsToData();
-      saveData();
+      scheduleSave();
       renderSite();
 
       localStorage.setItem("nyuukoria-site-sync", String(Date.now()));
@@ -1528,19 +1581,21 @@ function lockAdminForVisitors() {
   if (adminButton) adminButton.remove();
 }
 
-window.addEventListener("storage", (event) => {
+window.addEventListener("storage", async (event) => {
   if (
     event.key === "nyuukoria-site-data" ||
     event.key === "nyuukoria-site-sync"
   ) {
-    siteData = loadData();
-    renderSite();
+    if (hasUnsavedChanges) return;
+    const updated = await loadData();
+    if (updated) { siteData = updated; renderSite(); }
   }
 });
 
 /* INIT */
 async function initSite() {
   siteData = await loadData();
+  if (!siteData) return;
 
   lockAdminForVisitors();
 
