@@ -526,7 +526,7 @@
       if (!nudeClickCount) return;
 
       try {
-        const sessionKey = "sasutendo-counted-nude-click";
+        const sessionKey = "nyuukoria-counted-nude-click";
         const alreadyCounted = sessionStorage.getItem(sessionKey) === "true";
         const response = await fetch("/api/nude-click", {
           method: alreadyCounted ? "GET" : "POST",

@@ -59,6 +59,9 @@ The repository lets visitors look through the project behind [nyuukoria.tech](ht
 - Lightweight vanilla HTML, CSS, and JavaScript
 - Cloudflare Pages Functions and KV for shared production data
 
+Deployment, custom domains, editor login, and preserving existing data during the
+move from `sasutendo.tech` are covered in [the Cloudflare setup guide](docs/CLOUDFLARE.md).
+
 ## 👀 Viewing and sharing
 
 This repository and website are shared for **viewing and personal reference only**. They are not open source and are not provided as a template.
